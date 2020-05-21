@@ -3,6 +3,7 @@
 class Cheltuieli :virtual public ActivitateFinanciara
 {
 public:
-	Cheltuieli();
+	Cheltuieli(double);
+	Cheltuieli(double, Data);
 };
 

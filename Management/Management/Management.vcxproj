@@ -150,8 +150,10 @@
     <ClCompile Include="ActivitateFinanciara.cpp" />
     <ClCompile Include="Aplicatie.cpp" />
     <ClCompile Include="Cheltuieli.cpp" />
+    <ClCompile Include="Contract.cpp" />
     <ClCompile Include="cuAgenti.cpp" />
     <ClCompile Include="Directa.cpp" />
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="Investitie.cpp" />
     <ClCompile Include="Management.cpp" />
     <ClCompile Include="Plati.cpp" />
@@ -161,11 +163,17 @@
     <ClInclude Include="ActivitateFinanciara.h" />
     <ClInclude Include="Aplicatie.h" />
     <ClInclude Include="Cheltuieli.h" />
+    <ClInclude Include="Contract.h" />
     <ClInclude Include="cuAgenti.h" />
     <ClInclude Include="Directa.h" />
+    <ClInclude Include="Display.h" />
     <ClInclude Include="Investitie.h" />
     <ClInclude Include="Plati.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Venituri.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Management.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

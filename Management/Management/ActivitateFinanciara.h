@@ -19,9 +19,9 @@ protected:
 	double suma;
 
 public:
-	ActivitateFinanciara() = default;
-	//ActivitateFinanciara(double,unsigned, unsigned, unsigned, unsigned, unsigned);
-	ActivitateFinanciara(double);
+	//ActivitateFinanciara() = delete;
+	ActivitateFinanciara(double = 0 );
+	ActivitateFinanciara(double, Data&);
 	void setData(unsigned, unsigned, unsigned, unsigned, unsigned);
 	Data getData();
 	void setSuma(double);

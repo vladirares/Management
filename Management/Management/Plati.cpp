@@ -1,27 +1,58 @@
 #include "Plati.h"
 
-Plati::Plati(string nume, double suma, bool areRate , unsigned numarRate ) : CuAgenti(nume,suma,areRate,numarRate){
-	this->nume = nume;
-	this->suma = suma;
+Plati::Plati(double suma) : CuAgenti(suma), Cheltuieli(suma) , ActivitateFinanciara(suma) {
+	
+}
 
-	//Data *x = new Data();
+Plati::Plati(double suma, Data data) : CuAgenti(suma, data), Cheltuieli(suma), ActivitateFinanciara(suma) {
 
-	this->rate.areRate = areRate;
-	this->rate.numarRate = numarRate;
-	this->rate.dataScadenta = data;
+}
 
-	this->serie = serieCurenta;
-	this->serieCurenta++;
-	//this->setNume(nume);
-	//this->setSuma(suma);
+void  Plati::setNumarCont(string numar) {
+	this->numarCont = numar;
+}
+
+void  Plati::setNumarContTVA(string numar) {
+	this->numarContTVA = numar;
+}
+
+string Plati::getNumarCont() {
+	return this->numarCont;
+}
+
+string Plati::getNumarContTVA() {
+	return this->numarContTVA;
 }
 
 string Plati::getExtra() const{
 	string toReturn = "\n";
 	if (rate.areRate) {
-		toReturn += ("activitatea are " + to_string(rate.numarRate) + " rate\n");
-		toReturn += "cu data scadenta :" + to_string(rate.dataScadenta.zi) + "." + to_string(rate.dataScadenta.luna) + "." + to_string(rate.dataScadenta.an);
+		toReturn += ("activitatea are " + to_string(rate.numarRate) + " rate\n" +
+			"cu data scadenta :" + to_string(rate.dataScadenta.zi) + "." +
+			to_string(rate.dataScadenta.luna) + "." + to_string(rate.dataScadenta.an)) + "\n";
+		
 
 	}
+	else {
+		toReturn += "activitatea nu are rate\n";
+	}
+
+	toReturn += "contractul a fost incheiat cu " + this->nume + "\nseria facturii este " +
+				to_string(this->serie) + "\n";
+
+	toReturn += "numar cont: " + this->numarCont;
+	if (numarContTVA.length()>1) {
+	toReturn += "\nnumar cont TVA: " + this->numarContTVA;
+	}
+
+	int zile = Aplicatie::timeDif2(this->rate.dataScadenta.zi, this->rate.dataScadenta.luna, this->rate.dataScadenta.an);
+	if (zile > 0) {
+		toReturn += "mai sunt " + to_string(zile) + " zile pana la data scadenta\n";
+		toReturn += "au ramas de achitat " + to_string(rate.numarRate - zile / 30) + " rate";
+	}
+	else {
+		toReturn += "a fost achitat";
+	}
+
 	return toReturn;
 }

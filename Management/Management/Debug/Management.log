@@ -1,5 +1,10 @@
-﻿  Management.cpp
+﻿  Aplicatie.cpp
+D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Aplicatie.cpp(90,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Contract.cpp
+  Display.cpp
+D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Display.cpp(54,16): warning C4018: '<': signed/unsigned mismatch
+D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Display.cpp(236,36): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  Management.cpp
   Plati.cpp
-  cuAgenti.cpp
   Generating Code...
   Management.vcxproj -> D:\Programming\Projects\C++\temaPOO\Management\Management\Debug\Management.exe

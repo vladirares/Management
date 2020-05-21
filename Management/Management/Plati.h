@@ -1,6 +1,7 @@
 #pragma once
 #include "Cheltuieli.h"
 #include "cuAgenti.h"
+#include "Aplicatie.h"
 
 class Plati : public Cheltuieli, public CuAgenti
 {
@@ -8,9 +9,12 @@ class Plati : public Cheltuieli, public CuAgenti
 	string numarContTVA;
 public:
 	Plati() = delete;
-	Plati(string, double, bool areRate = false, unsigned numarRate = 0);
+	Plati(double);
+	Plati(double, Data);
 	void setNumarCont(string);
 	void setNumarContTVA(string);
+	string getNumarCont();
+	string getNumarContTVA();
 	string getExtra() const;
 
 };

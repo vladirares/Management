@@ -5,7 +5,7 @@
 //	setSuma(suma);
 //}
 
-ActivitateFinanciara::ActivitateFinanciara(double suma) {
+ActivitateFinanciara::ActivitateFinanciara(double suma ) {
 	
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
@@ -15,6 +15,21 @@ ActivitateFinanciara::ActivitateFinanciara(double suma) {
 	this->data.zi =  ltm->tm_mday;
 	this->data.ora =  ltm->tm_hour;
 	this->data.minut =  ltm->tm_min;
+
+	this->suma = suma;
+
+}
+
+ActivitateFinanciara::ActivitateFinanciara(double suma, Data &data) {
+
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+
+	this->data.an = data.an;
+	this->data.luna = data.luna;
+	this->data.zi = data.zi;
+	this->data.ora = data.ora;
+	this->data.minut = data.minut;
 
 	this->suma = suma;
 

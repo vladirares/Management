@@ -21,12 +21,16 @@ protected:
 
 public:
 	CuAgenti() = delete;
-	CuAgenti(string , double, bool areRate = false, unsigned numarRate = 0);		//constructor pentru data curenta
-	//CuAgenti(string, double, bool areRate , unsigned numarRate , Data& data , unsigned, unsigned ,unsigned ,unsigned, unsigned);	//constructor pentru actiune trecuta
+	CuAgenti(double);
+	CuAgenti(double, Data&);
 	void setNume(string);
-	void setDataScadenta(unsigned, unsigned, unsigned, unsigned, unsigned);
+	void setAreRate(bool);
+	void setNumarRate(unsigned);
+	void setDataScadenta(unsigned zi, unsigned luna, unsigned an);
 	string getNume();
 	//void setSerie();
+	bool getAreRate();
+	unsigned getNumarRate();
 	unsigned getSerie();
 	string getExtra()const;
 	virtual ~CuAgenti();

@@ -3,21 +3,35 @@
 #include <string>
 #include "ActivitateFinanciara.h"
 #include "cuAgenti.h"
+#include "Investitie.h"
 #include "Plati.h"
+#include "Aplicatie.h"
+#include "Display.h"
 
 using namespace std;
 
 int main()
-{
-    ActivitateFinanciara *act2 = new CuAgenti("mama",100,true,4);
-    
-    cout << *act2<<endl;
+{/*
+    Investitie* invest = new Investitie(100);
+    invest->setPerioadaAmortizare(4);
+    invest->setDescriere("test test test");
+    invest->setSursaBani(imprumut);
+
+    cout << *invest;
+
+    Aplicatie::getInstance()->insert(invest);*/
+
+   // for (int i = 0; i < 1000; i++) {
+       
+
+        //cout << "mama";
+       // if (system("CLS")) system("clear");
+    //}
+
+    Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
+    Aplicatie::getInstance()->display();
 
 
-    ActivitateFinanciara* act = new Plati("mama", 100, true, 4);
-    cout << *act;
-
-    cout << endl;
 
     return 0;
 }
