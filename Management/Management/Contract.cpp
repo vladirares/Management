@@ -19,9 +19,6 @@ string Contract::getExtra()const {
 	toReturn += "contractul a fost incheiat cu " + this->nume + "\nseria facturii este " +
 				to_string(this->serie)+"\n";
 
-	/*int zile = Aplicatie::timeDif(this->rate.dataScadenta.zi, this->rate.dataScadenta.luna, this->rate.dataScadenta.an,
-		Aplicatie::getCurrentDay(), Aplicatie::getCurrentMonth(), Aplicatie::getCurrentYear());*/
-
 	int zile = Aplicatie::timeDif2(this->rate.dataScadenta.zi, this->rate.dataScadenta.luna, this->rate.dataScadenta.an);
 	if ((int)rate.numarRate - zile / 30 > 0) {
 		toReturn += "mai sunt " + to_string(zile) + " zile pana la data scadenta\n";

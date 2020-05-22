@@ -9,16 +9,19 @@ const bool curent = true;
 
 class Aplicatie
 {
-public: //trebuie facut startup
-	enum State { meniu, addAction, addActionInvestition, addActionPayment, addActionContract, addActionDirect, installments };
+public: 
+	enum State { meniu, addAction, addActionInvestition, addActionPayment, addActionContract, addActionDirect, installments, reports, direct };
 	State state;
+
 private:
 	static Aplicatie* instance;
 	vector<ActivitateFinanciara*> activitati;
 	bool mod;
 	Aplicatie();
 	friend class Display;
-	
+
+	unsigned zi, luna, an;
+	bool hasStarted;
 
 public:
 	void insert(ActivitateFinanciara* activitate);
@@ -33,5 +36,6 @@ public:
 	static int getCurrentYear();
 	void setMod(bool);
 	bool getMod() const;
+	void start();
 };
 

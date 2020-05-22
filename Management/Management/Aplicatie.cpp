@@ -2,6 +2,7 @@
 
 Aplicatie::Aplicatie() {
 	this->mod = curent;
+	this->hasStarted = false;
 }
 
 Aplicatie* Aplicatie::instance;
@@ -44,6 +45,12 @@ void Aplicatie::display() {
 	case (installments):
 		Display::displayInstallments();
 		break;
+	case (reports):
+		Display::displayReports();
+		break;
+	case (direct):
+		Display::displayDirect();
+		break;
 	default:
 		Display::displayMenu();
 		break;
@@ -61,22 +68,6 @@ void Aplicatie::setState(State state) {
 
 int Aplicatie::timeDif(unsigned zi2, unsigned luna2, unsigned an2, unsigned zi1, unsigned luna1 , unsigned an1) {
 	int zile;
-	/*if (an2 < an1) {
-		toReturn = "data scadenta depasita";
-		return toReturn;
-	}
-	else if(an2 > an1){
-		toReturn += "pana la data scadenta mai " + (an2 - an1 == 1) ? " este  un " : "sunt" +   to_string(an2-an1) + ((an2-an1 > 1) ? " ani " : " an ");
-	}
-	
-	if (luna2 < luna1 && an2 == an1) {
-		toReturn = "data scadenta depasita";
-		return toReturn;
-	}
-	else if(luna2 >luna1){
-		toReturn += "pana la data scadenta mai " + (an2 - an1 == 1) ? " este  un " : "sunt" + to_string(an2 - an1) + ((an2 - an1 > 1) ? " ani " : " an ");
-	}*/
-
 
 	tm data2 = { 0 }, data1 = {0};
 	data2.tm_wday = zi2;
@@ -106,7 +97,7 @@ int Aplicatie::timeDif2(unsigned day, unsigned month, unsigned year) {
 	struct tm dataScadenta;
 	double seconds;
 
-	time(&now);  /* get current time; same as: now = time(NULL)  */
+	time(&now);  
 
 	dataScadenta = *localtime(&now);
 
@@ -144,4 +135,8 @@ void Aplicatie::setMod(bool mod) {
 
 bool Aplicatie::getMod() const{
 	return this->mod;
+}
+
+void Aplicatie::start() {
+	Display::start();
 }

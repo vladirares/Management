@@ -1,10 +1,5 @@
 #include "ActivitateFinanciara.h"
 
-//ActivitateFinanciara::ActivitateFinanciara(double suma, unsigned zi = 0, unsigned luna = 0, unsigned an = 0, unsigned ora = 0, unsigned minut = 0){
-//	setData(zi,luna,an,ora,minut);
-//	setSuma(suma);
-//}
-
 ActivitateFinanciara::ActivitateFinanciara(double suma ) {
 	
 	time_t now = time(0);
@@ -35,12 +30,10 @@ ActivitateFinanciara::ActivitateFinanciara(double suma, Data &data) {
 
 }
 
-void ActivitateFinanciara::setData(unsigned zi, unsigned luna, unsigned an, unsigned ora, unsigned minut) {
+void ActivitateFinanciara::setData(unsigned zi, unsigned luna, unsigned an) {
 	this->data.zi = zi;
 	this->data.luna = luna;
 	this->data.an = an;
-	this->data.ora = ora;
-	this->data.minut = minut;
 }
 
 ActivitateFinanciara::Data ActivitateFinanciara::getData() {

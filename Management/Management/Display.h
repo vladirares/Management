@@ -12,6 +12,7 @@ using namespace std;
 class Display
 {
 	static const int xsize = 120, ysize = 30;
+	
 public:
 	static char ecran[210][210];
 	static void moveCursor(int left = 0, int up = 0, int right = 0, int down = 0);
@@ -20,6 +21,7 @@ public:
 	static void displayLogo();
 	static void displayBorder(unsigned xWidth, unsigned yWidth);
 
+	static void displayIstoric();
 
 	static void displayMenu();
 	static void displayAddAction();
@@ -29,5 +31,11 @@ public:
 	static void displayAddActionDirect();
 	
 	static void displayInstallments();
+
+	static void displayReports();
+
+	static void displayDirect();
+
+	static void start();
 };
 

@@ -121,15 +121,36 @@ void Display::displayMenu() {
 
 	Display::display(xsize, ysize);
 
-	for (int i = 0; i < 17; i++) {
-		cout << "\x1b[A";
+	if (!Aplicatie::getInstance()->hasStarted) {
+
+		for (int i = 0; i < 17; i++) {
+			cout << "\x1b[A";
+		}
+		cout << "\t    ";
+		Aplicatie::getInstance()->hasStarted = true;
 	}
-	cout << "\t    ";
+	else {
+		for (int i = 0; i < 8; i++) {
+			cout << "\x1b[A";
+		}
+		for (int i = 0; i < 130; i++) {
+			cout << "\b";
+		}
+		cout << "\t    ";
+	}
 
 	char answer;
 	cin >> answer;
+
 	switch (answer) {
 	case 'a':
+		
+		if (Aplicatie::getInstance()->getMod() == istoric)
+		{
+			if (system("CLS")) system("clear");
+			displayIstoric();
+		}
+
 		Aplicatie::getInstance()->setState(Aplicatie::State::addAction);
 		if (system("CLS")) system("clear");
 		Aplicatie::getInstance()->display();
@@ -143,6 +164,17 @@ void Display::displayMenu() {
 		Aplicatie::getInstance()->setMod(!Aplicatie::getInstance()->getMod());
 		if (system("CLS")) system("clear");
 		Aplicatie::getInstance()->display();
+		break;
+	case 'r':
+		Aplicatie::getInstance()->setState(Aplicatie::State::reports);
+		if (system("CLS")) system("clear");
+		Aplicatie::getInstance()->display();
+		break;
+	case 'd':
+		Aplicatie::getInstance()->setState(Aplicatie::State::direct);
+		if (system("CLS")) system("clear");
+		Aplicatie::getInstance()->display();
+		break;
 
 	default:
 		break;
@@ -168,6 +200,7 @@ void Display::displayAddAction() {
 
 	char answer;
 	cin >> answer;
+	
 	switch (answer) {
 	case 'b':
 		Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
@@ -193,6 +226,7 @@ void Display::displayAddAction() {
 		if (system("CLS")) system("clear");
 		Aplicatie::getInstance()->display();
 		break;
+
 	default:
 		break;
 	}
@@ -257,6 +291,10 @@ void Display::displayAddActionInvestition() {
 	char sursa;
 	cin >> sursa;
 	investitie->setSursaBani(sursa == 'i' ? 0 : 1 );
+
+	if (Aplicatie::getInstance()->getMod() == istoric) {
+		investitie->setData(Aplicatie::getInstance()->zi, Aplicatie::getInstance()->luna, Aplicatie::getInstance()->an);
+	}
 
 	Aplicatie::getInstance()->insert(investitie);
 
@@ -387,6 +425,9 @@ void Display::displayAddActionPayment() {
 		plata->setAreRate(false);
 	}
 
+	if (Aplicatie::getInstance()->getMod() == istoric) {
+		plata->setData(Aplicatie::getInstance()->zi, Aplicatie::getInstance()->luna, Aplicatie::getInstance()->an);
+	}
 	Aplicatie::getInstance()->insert(plata);
 
 	Aplicatie::getInstance()->setState(Aplicatie::State::addAction);
@@ -490,6 +531,9 @@ void Display::displayAddActionContract() {
 		contract->setAreRate(false);
 	}
 
+	if (Aplicatie::getInstance()->getMod() == istoric) {
+		contract->setData(Aplicatie::getInstance()->zi, Aplicatie::getInstance()->luna, Aplicatie::getInstance()->an);
+	}
 	Aplicatie::getInstance()->insert(contract);
 
 	Aplicatie::getInstance()->setState(Aplicatie::State::addAction);
@@ -561,8 +605,65 @@ void Display::displayAddActionDirect() {
 		directa->setPlata(card, nrCard, emitent);
 
 	}
-
+	if (Aplicatie::getInstance()->getMod() == istoric) {
+		directa->setData(Aplicatie::getInstance()->zi, Aplicatie::getInstance()->luna, Aplicatie::getInstance()->an);
+	}
 	Aplicatie::getInstance()->insert(directa);
+
+	Aplicatie::getInstance()->setState(Aplicatie::State::addAction);
+	Aplicatie::getInstance()->display();
+
+
+}
+
+void Display::displayIstoric() {
+
+	Display::displayBorder(xsize, ysize);
+	Display::displayButton(4, 9, 8, 70, "Ziua .............. ");
+	Display::displayButton(9, 9, 13, 70, "Luna ..............");
+	Display::displayButton(14, 9, 18, 70, "An................ ");
+	Display::displayButton(24, 9, 28, 20, "Enter ");
+	//Display::displayButton(24, 20, 28, 27, "");
+
+	Display::display(xsize, ysize);
+
+	for (int i = 0; i < 24; i++) {
+		cout << "\x1b[A";
+	}
+	for (int i = 0; i < 100; i++) {
+		cout << "\b";
+	}
+
+	//moveCursor(24, 120);
+
+	unsigned zi;
+	cin >> zi;
+	Aplicatie::getInstance()->zi = zi;
+
+	//moveCursor(0,0,8,3);
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+	cout << "\b\b\b\b";
+
+	int luna;
+	cin >> luna;
+	Aplicatie::getInstance()->luna = luna;
+
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+	cout << "\b\b\b\b";
+
+	int an;
+	cin >> an;
+	Aplicatie::getInstance()->an = an;
 
 	Aplicatie::getInstance()->setState(Aplicatie::State::addAction);
 	Aplicatie::getInstance()->display();
@@ -577,7 +678,6 @@ void Display::displayInstallments() {
 		}*/
 
 		if (CuAgenti* v = dynamic_cast<CuAgenti*>(act)) {
-			// old was safely casted to NewType
 			if (v->getAreRate()) {
 				cout << *v;
 				cout << endl <<endl;
@@ -587,5 +687,182 @@ void Display::displayInstallments() {
 	char x;
 	cout << "press any button to get to the menu";
 	cin >> x;
-	displayMenu();
+	Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
+	//displayMenu();
+	Aplicatie::getInstance()->display();
+	
+}
+
+void Display::displayReports() {
+	double venit = 0;
+	double cheltuit = 0;
+
+	Display::displayBorder(xsize, ysize);
+	Display::displayButton(4, 9, 8, 90, "Luna .............. ");
+	Display::displayButton(9, 9, 13, 90, "An ..............");
+	Display::display(xsize, ysize);
+
+	for (int i = 0; i < 24; i++) {
+		cout << "\x1b[A";
+	}
+	for (int i = 0; i < 100; i++) {
+		cout << "\b";
+	}
+
+	unsigned luna;
+	cin >> luna;
+
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+	cout << "\b\b\b\b";
+
+	unsigned an;
+	cin >> an;
+
+	for (ActivitateFinanciara* act : Aplicatie::getInstance()->activitati) {
+		if (Venituri* v = dynamic_cast<Venituri*>(act)) {
+			if(act->getData().an == an && act->getData().luna == luna)
+			venit += act->getSuma();
+		}
+	}
+
+	for (ActivitateFinanciara* act : Aplicatie::getInstance()->activitati) {
+		if (Cheltuieli* v = dynamic_cast<Cheltuieli*>(act)) {
+			if (act->getData().an == an && act->getData().luna == luna)
+				cheltuit += act->getSuma();
+		}
+	}
+	string total="totalul pe luna ";
+
+	switch (luna) {
+	case 1: total += "ianuarie";
+		break;
+	case 2: total += "februarie";
+		break;
+	case 3: total += "martie";
+		break;
+	case 4: total += "aprilie";
+		break;
+	case 5: total += "mai";
+		break;
+	case 6: total += "iunie";
+		break;
+	case 7: total += "iulie";
+		break;
+	case 8: total += "august";
+		break;
+	case 9: total += "septembrie";
+		break;
+	case 10: total += "octombrie";
+		break;
+	case 11: total += "noiembrie";
+		break;
+	case 12: total += "decembrie";
+		break;
+	default:
+		break;
+
+	}
+
+	total += " in anul " + to_string(an) + " este " + to_string(venit-cheltuit);
+
+	if (system("CLS")) system("clear");
+	string lunaText = "Luna " + to_string(luna);
+	string anText = "An " + to_string(an);
+	Display::displayBorder(xsize, ysize);
+	Display::displayButton(4, 9, 8, 90, lunaText);
+	Display::displayButton(9, 9, 13, 90, anText);
+	Display::displayButton(14, 9, 18, 90, total);
+	Display::display(xsize, ysize);
+
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+
+	cout << "press any button to get to the menu";
+
+	string x;
+	cin >> x;
+	Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
+	//displayMenu();
+	Aplicatie::getInstance()->display();
+
+}
+
+void Display::start() {
+	Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
+	if (system("CLS")) system("clear");
+	Aplicatie::getInstance()->display();
+}
+
+
+void Display::displayDirect() {
+
+	
+
+	Display::displayBorder(xsize, ysize);
+	Display::displayButton(4, 9, 8, 90, "zi .............. ");
+	Display::displayButton(9, 9, 13, 90, "Luna ..............");
+	Display::displayButton(14, 9, 18, 90, "An ..............");
+	Display::display(xsize, ysize);
+
+	for (int i = 0; i < 24; i++) {
+		cout << "\x1b[A";
+	}
+	for (int i = 0; i < 100; i++) {
+		cout << "\b";
+	}
+
+	unsigned zi;
+	cin >> zi;
+
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+	cout << "\b\b\b\b";
+
+	unsigned luna;
+	cin >> luna;
+
+	for (int i = 0; i < 4; i++) {
+		cout << "\n";
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << "\t";
+	}
+	cout << "\b\b\b\b";
+
+	unsigned an;
+	cin >> an;
+
+	if (system("CLS")) system("clear");
+
+	double total = 0 ;
+	
+	for (ActivitateFinanciara* act : Aplicatie::getInstance()->activitati) {
+		if (Directa* v = dynamic_cast<Directa*>(act)) {
+			if (act->getData().zi == zi && act->getData().luna == luna && act->getData().an == an) {
+				cout << *act;
+				cout << endl << endl;
+				total += act->getSuma();
+			}
+		}
+	}
+	cout << "total : " << total << "lei\n\n";
+	cout << "press any button to continue ";
+	string x;
+	cin >> x;
+	Aplicatie::getInstance()->setState(Aplicatie::State::meniu);
+	Aplicatie::getInstance()->display();
+
 }
