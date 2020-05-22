@@ -1,16 +1,3 @@
-﻿  ActivitateFinanciara.cpp
-  Aplicatie.cpp
-D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Aplicatie.cpp(81,10): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Cheltuieli.cpp
-  Contract.cpp
-  Directa.cpp
-  Display.cpp
-D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Display.cpp(54,16): warning C4018: '<': signed/unsigned mismatch
-D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Display.cpp(270,36): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
-  Investitie.cpp
-  Management.cpp
-  Plati.cpp
-  Venituri.cpp
-  cuAgenti.cpp
-  Generating Code...
+﻿  Plati.cpp
+D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Plati.cpp(51,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Management.vcxproj -> D:\Programming\Projects\C++\temaPOO\Management\Management\Debug\Management.exe

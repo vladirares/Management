@@ -42,17 +42,21 @@ string Plati::getExtra() const{
 
 	toReturn += "numar cont: " + this->numarCont;
 	if (numarContTVA.length()>1) {
-	toReturn += "\nnumar cont TVA: " + this->numarContTVA;
+	toReturn += "\nnumar cont TVA: " + this->numarContTVA+"\n";
 	}
 
 	int zile = Aplicatie::timeDif2(this->rate.dataScadenta.zi, this->rate.dataScadenta.luna, this->rate.dataScadenta.an);
-	if (zile > 0) {
+	int zileTotal = Aplicatie::timeDif(this->rate.dataScadenta.zi, this->rate.dataScadenta.luna, this->rate.dataScadenta.an, this->data.zi, this->data.luna, this->data.an);
+	int nrRate = ((double)this->rate.numarRate / zileTotal) * zile;
+
+	if (nrRate > 0 && zile>0) {
 		toReturn += "mai sunt " + to_string(zile) + " zile pana la data scadenta\n";
-		toReturn += "au ramas de achitat " + to_string(rate.numarRate - zile / 30) + " rate";
+		toReturn += "au ramas de achitat " + to_string(nrRate) + " rate";
 	}
 	else {
 		toReturn += "a fost achitat";
 	}
+
 
 	return toReturn;
 }

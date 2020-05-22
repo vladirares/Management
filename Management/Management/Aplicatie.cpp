@@ -67,28 +67,24 @@ void Aplicatie::setState(State state) {
 }
 
 int Aplicatie::timeDif(unsigned zi2, unsigned luna2, unsigned an2, unsigned zi1, unsigned luna1 , unsigned an1) {
-	int zile;
+	time_t now;
+	struct tm dataScadenta,dataInitiala;
+	double seconds;
 
-	tm data2 = { 0 }, data1 = {0};
-	data2.tm_wday = zi2;
-	data2.tm_mon = luna2-1;
-	data2.tm_year = an2-1900;
+	time(&now);
 
-	data1.tm_wday = zi1;
-	data1.tm_mon = luna1;
-	data1.tm_year = an1;
+	dataScadenta = *localtime(&now);
 
-	int dif = difftime(mktime(&data2), mktime(&data1));
+	dataScadenta.tm_hour = 0; dataScadenta.tm_min = 0; dataScadenta.tm_sec = 0;
+	dataScadenta.tm_mon = luna1 -1;  dataScadenta.tm_mday = zi1 ; dataScadenta.tm_year = an1 - 1900;
 
-	if (dif < 0) {
-		return -1;
-	}
-	else {
-		
-		zile = dif / 86400;
-	}
+	dataInitiala = *localtime(&now);
 
-	return zile;
+	dataInitiala.tm_hour = 0; dataInitiala.tm_min = 0; dataInitiala.tm_sec = 0;
+	dataInitiala.tm_mon = luna2 -1;  dataInitiala.tm_mday = zi2 ; dataInitiala.tm_year = an2 - 1900;
+
+	seconds = difftime(mktime(&dataInitiala), mktime(&dataScadenta));
+	return int(seconds) / 86400;
 
 }
 
@@ -102,7 +98,7 @@ int Aplicatie::timeDif2(unsigned day, unsigned month, unsigned year) {
 	dataScadenta = *localtime(&now);
 
 	dataScadenta.tm_hour = 0; dataScadenta.tm_min = 0; dataScadenta.tm_sec = 0;
-	dataScadenta.tm_mon = month;  dataScadenta.tm_mday = day + 1; dataScadenta.tm_year = year - 1900;
+	dataScadenta.tm_mon = month - 1;  dataScadenta.tm_mday = day ; dataScadenta.tm_year = year - 1900;
 
 	seconds = difftime(mktime(&dataScadenta),now);
 	return int(seconds)/86400;
