@@ -36,37 +36,22 @@ void CuAgenti::setDataScadenta(unsigned zi, unsigned luna, unsigned an) {
 
 }
 
-string CuAgenti::getNume() {
+string CuAgenti::getNume() const{
 	return nume;
 }
 
-bool CuAgenti::getAreRate() {
+bool CuAgenti::getAreRate() const{
 	return this->rate.areRate;
 }
 
-unsigned CuAgenti::getNumarRate() {
+unsigned CuAgenti::getNumarRate() const{
 	return this->rate.numarRate;
 }
 
-unsigned CuAgenti::getSerie() {
+unsigned CuAgenti::getSerie() const {
 	return serie;
 }
 
-
-////poate stergem de aici !!!!
-string CuAgenti::getExtra()const {
-	string toReturn = "\n";
-	if (rate.areRate) {
-		toReturn += ("activitatea are " + to_string(rate.numarRate) + " rate\n" +
-					"cu data scadenta :" + to_string(rate.dataScadenta.zi) + "." +
-					to_string(rate.dataScadenta.luna) + "." + to_string(rate.dataScadenta.an)) + "\n";
-	
-	}
-	else {
-		toReturn += "activitatea nu are rate\n";
-	}
-	return toReturn;
-}
 
 CuAgenti::~CuAgenti() {
 

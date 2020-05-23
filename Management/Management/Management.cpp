@@ -10,11 +10,10 @@
 
 using namespace std;
 
+
 int main()
 {
     Aplicatie::getInstance()->start();
-
-
 
     return 0;
 }

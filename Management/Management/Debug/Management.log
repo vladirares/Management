@@ -1,3 +1,4 @@
-﻿  Plati.cpp
-D:\Programming\Projects\C++\temaPOO\Management\Management\Management\Plati.cpp(51,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+﻿  Management.cpp
+  cuAgenti.cpp
+  Generating Code...
   Management.vcxproj -> D:\Programming\Projects\C++\temaPOO\Management\Management\Debug\Management.exe

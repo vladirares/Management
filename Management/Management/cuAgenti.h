@@ -27,12 +27,10 @@ public:
 	void setAreRate(bool);
 	void setNumarRate(unsigned);
 	void setDataScadenta(unsigned zi, unsigned luna, unsigned an);
-	string getNume();
-	//void setSerie();
-	bool getAreRate();
-	unsigned getNumarRate();
-	unsigned getSerie();
-	string getExtra()const;
+	string getNume()const;
+	bool getAreRate()const;
+	unsigned getNumarRate()const;
+	unsigned getSerie()const;
 	virtual ~CuAgenti();
 };
 
